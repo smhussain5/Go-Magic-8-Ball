@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math/rand"
+	"os"
+	"strings"
 )
 
-var magic8Responses []string = []string{
+var Magic8Responses []string = []string{
 	"Without a doubt! [Y]",
 	"Very doubtful! [N]",
 	"Concentrate and ask again... [M]",
@@ -21,8 +24,18 @@ var magic8Responses []string = []string{
 }
 
 func main() {
-	num := rand.Int() % len(magic8Responses)
-	fmt.Println("Hello World!")
-	fmt.Println(num)
-	fmt.Println(magic8Responses[num])
+	fmt.Println("WELCOME TO YOUR MAGIC 8 BALL")
+	fmt.Println("Ask a question and let fate decide for you!")
+	fmt.Println("")
+	fmt.Print("What knowledge do you seek? [Press ENTER when done]: ")
+	var question string
+	input := bufio.NewReader(os.Stdin)
+	question, err := input.ReadString('\n')
+	question = strings.TrimSpace(question)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("\nYou asked: %v\n", question)
+	num := rand.Int() % len(Magic8Responses)
+	fmt.Printf("Magic 8 responds: %v\n", Magic8Responses[num])
 }
